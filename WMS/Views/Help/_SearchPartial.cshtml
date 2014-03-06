@@ -16,20 +16,21 @@
     };
 
     function S_select() {
-        var queryParams = $('#details').datagrid('options').queryParams;
-        queryParams.ContentCode = $('#contentCode').val();
-        queryParams.ContentName = $('#contentName').val();
-        queryParams.NodeType = $('#nodeType').combo('getValue');
-        queryParams.FatherContentID = fatherContentID;
-        queryParams.ModuleID = S_moduleID;
-        queryParams.IsActive = $('#status').combo('getValue');
-        $('#details').datagrid('options').queryParams = queryParams;
-//        $('#details').datagrid({
-//            pageNumber: 1,
-//            pageSize: 50
-//        });
-        $("#details").datagrid('reload');
-        $('#dlg-search').dialog('close');
+        $.getJSON("/HelpEdit/SearchNode/?ContentCode=" + $('#contentCode').val() + '&ContentName=' + escape($('#contentName').val()) + '&NodeType=' + $('#nodeType').combo('getValue') + '&FatherContentID=' + fatherContentID + '&ModuleID=' + S_moduleID + '&IsActive=' + $('#status').combo('getValue'),
+        function (json) {
+            if (json) {
+                //                alert(json.rows[0].ContentCode);
+                if (json.total > 0) { //有存在节点
+                    var node = $('#helpTree').tree('find', json.rows[0].ContentCode);
+                    $('#helpTree').tree('expandTo', node.target);
+                    $('#helpTree').tree('select', node.target);
+                    $('#dlg-search').dialog('close');
+                }
+                else { //不存在节点
+                    alert("找不到所查找的节点,或者该节点属于根节点");
+                }
+            }
+        });
     }
     function helpSelect3() {
         $('#helpData2').dialog('open').dialog('setTitle', '选择模块信息');

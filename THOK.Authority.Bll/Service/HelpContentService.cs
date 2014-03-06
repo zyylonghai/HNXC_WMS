@@ -80,7 +80,11 @@ namespace THOK.Authority.Bll.Service
                 help.UPDATE_TIME = DateTime.Now;
 
                 HelpContentRepository.Add(help);
-                HelpContentRepository.SaveChanges();
+               int rs= HelpContentRepository.SaveChanges();
+               if (rs == -1) {
+                   result = false;
+               }
+                else 
                 result = true;
             }
             catch (Exception ex)

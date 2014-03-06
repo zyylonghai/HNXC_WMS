@@ -11,7 +11,7 @@
         //var inputs = document.getElementsByTagName("editor01");
         $('#editor01').xheditor({ upLinkUrl: "/Content/Scripts/xheditor1.1.14/upload.aspx", upLinkExt: "zip,rar,txt", upImgUrl: "/Content/Scripts/xheditor1.1.14/upload.aspx", upImgExt: "jpg,jpeg,gif,png" });
         $('#helpTree').tree({
-            onClick: function (node) {
+            onSelect: function (node) {
                 if (node) {
                     helpID = node.attributes.AttributeId;
                     if (helpID != "1" && helpID != "3") {

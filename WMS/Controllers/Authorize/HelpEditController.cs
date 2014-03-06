@@ -9,6 +9,7 @@ using THOK.Authority.Bll.Interfaces;
 using System;
 using Wms.Security;
 using THOK.Security;
+using System.Reflection;
 
 namespace WMS.Controllers.Authority
 {
@@ -58,6 +59,20 @@ namespace WMS.Controllers.Authority
         {
             var helpContent = HelpContentService.GetSingleContentTxt(helpId);
             return Json(helpContent, "text/html", JsonRequestBehavior.AllowGet);
+        }
+        //查找出节点,  若查询出多个节点,默认选中头一个.
+        public ActionResult SearchNode(string ContentCode, string ContentName, string NodeType, string FatherContentID, string ModuleID, string IsActive)
+        {
+            var nodes = HelpContentService.GetDetails2(1, 100, ContentCode, ContentName, NodeType, FatherContentID, ModuleID, IsActive);
+            //JsonResult jsonrs = Json(nodes, "text/html", JsonRequestBehavior.AllowGet);
+            //Type detailtype = nodes.GetType();
+            //PropertyInfo[] aa = detailtype.GetProperties();
+            //AUTH_HELP_CONTENT[] help = (AUTH_HELP_CONTENT[])aa[1].GetValue(nodes, null);
+            //var result = new { 
+            //    nodeid=help[0].CONTENT_CODE 
+            //};
+            return Json(nodes, "text/html", JsonRequestBehavior.AllowGet);
+            
         }
     }
 }

@@ -2,7 +2,7 @@
     var Help_Text;
     window.onload = function () {
         $('#helpTree').tree({
-            onClick: function (node) {
+            onSelect: function (node) {
                 if (node) {
                     helpID = node.attributes.AttributeId;
                     $.getJSON("/HelpEdit/GetContentTxt/", { 'helpId': helpID }, function (helpContent) {
