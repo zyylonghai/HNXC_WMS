@@ -58,7 +58,7 @@ namespace THOK.Authority.Bll.Service
                 //  USER_ID = Guid.NewGuid().ToString(),
                 EVENT_LOG_ID = SystemEventLogRepository.GetNewID("AUTH_SYSTEM_EVENT_LOG", "EVENT_LOG_ID"),
                 EVENT_NAME = eventName,
-                EVENT_DESCRIPTION = eventDescription,
+                EVENT_DESCRIPTION = eventDescription.Substring (0,eventDescription .LastIndexOf ('/')),
                 OPERATE_USER = operateUser,
                 TARGET_SYSTEM = targetSystem,
                 FROM_PC = idAdress,
