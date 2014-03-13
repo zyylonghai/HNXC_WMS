@@ -172,7 +172,8 @@ namespace THOK.Wms.Bll.Service
                 IQueryable<CMD_PRODUCT> productquery = ProductRepository.GetQueryable();
                 List<Productinfo> list = new List<Productinfo>();
                 var detail=BillDetailRepository .GetQueryable ().Where (i=>i.BILL_NO ==billno);
-               packagecount = detail .Sum (i=>i.PACKAGE_COUNT ).ToString ();
+                if (detail.Count ()!=0)
+                    packagecount = detail.Sum(i => i.PACKAGE_COUNT).ToString();
                var detail2 = from a in detailquery
                              join b in productquery on a.PRODUCT_CODE equals b.PRODUCT_CODE
                              where a.BILL_NO == billno && a.IS_MIX == "1"
@@ -241,7 +242,17 @@ namespace THOK.Wms.Bll.Service
                     YEARS=i.IS_MIX =="1"?list .FirstOrDefault (t=>t.PRODUCT_CODE==i.PRODUCT_CODE ).YEARS :i.YEARS ,
                     IS_MIX=i.IS_MIX =="1"?"是":"否",
                     MODULES= i.MODULES==null ?"A":i.MODULES  ,
-                    PACKAGECOUNT = packagecount
+                    PACKAGECOUNT = packagecount,
+                    ORGINAL_NAME2 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).ORIGINAL_NAME.Split(',')[1] : " ",
+                    STYLE_NAME2 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).STYLE.Split(',')[1] : " ",
+                    GRADENAME2 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).GRADE_NAME.Split(',')[1] : " ",
+                    YEARS2 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).YEARS.Split(',')[1] : " ",
+                    REALWEIGHT2 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).WEIGHT.Split(',')[1] : " ",
+                    ORGINAL_NAME3 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).ORIGINAL_NAME.Split(',')[2] : " ",
+                    STYLE_NAME3 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).STYLE.Split(',')[2] : " ",
+                    GRADENAME3 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).GRADE_NAME.Split(',')[2] : " ",
+                    YEARS3 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).YEARS.Split(',')[2] : " ",
+                    REALWEIGHT3 = i.IS_MIX == "1" ? list.FirstOrDefault(t => t.PRODUCT_CODE == i.PRODUCT_CODE).WEIGHT.Split(',')[2] : " "
                 });
                 DataTable dt = THOK.Common.ConvertData.LinqQueryToDataTable(que);
                 using (Report report = new Report())
