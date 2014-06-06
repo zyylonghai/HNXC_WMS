@@ -13,7 +13,7 @@ namespace THOK.Wms.DbModel.Mapping
             // Properties
             this.Property(t => t.PRODUCT_CODE)
                 .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(30);
 
             this.Property(t => t.PRODUCT_NAME)
                 .IsRequired()

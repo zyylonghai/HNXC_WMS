@@ -26,6 +26,7 @@ namespace THOK.Wms.DbModel
         public string CIGARETTE_CODE { get; set; }
         public string FORMULA_CODE { get; set; }
         public decimal BATCH_WEIGHT { get; set; }
+        public string BATCH_NO { get; set; }
         public virtual CMD_BILL_TYPE CMD_BILL_TYPE { get; set; }
         public virtual CMD_CIGARETTE CMD_CIGARETTE { get; set; }
         public virtual CMD_PRODUCTION_LINE CMD_PRODUCTION_LINE { get; set; }

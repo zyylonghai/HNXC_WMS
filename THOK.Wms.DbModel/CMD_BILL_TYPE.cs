@@ -21,5 +21,6 @@ namespace THOK.Wms.DbModel
         public string TASK_TYPE { get; set; }
         public virtual ICollection<WMS_BILL_MASTER> WMS_BILL_MASTER { get; set; }
         public virtual ICollection<WMS_BILL_MASTERH> WMS_BILL_MASTERH { get; set; }
+        public virtual ICollection<VIEW_BILL_MAST> VIEW_BILL_MAST { get; set; }
     }
 }

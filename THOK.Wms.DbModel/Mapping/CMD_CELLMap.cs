@@ -68,6 +68,8 @@ namespace THOK.Wms.DbModel.Mapping
                 .IsRequired()
                 .IsFixedLength()
                 .HasMaxLength(3);
+            this.Property(t => t.CELL_STATE)
+                .HasMaxLength(1);
 
             // Table & Column Mappings
             this.ToTable("CMD_CELL","HNXC");

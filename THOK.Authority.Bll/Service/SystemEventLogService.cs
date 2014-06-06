@@ -52,13 +52,20 @@ namespace THOK.Authority.Bll.Service
         }
         public void CreateEventLog(string eventName, string eventDescription, string operateUser, string targetSystem, string idAdress)
         {
-
+            string eventdesc = "";
+            try
+            {
+                eventdesc = eventDescription.Substring(0, eventDescription.LastIndexOf('?'));
+            }
+            catch (Exception ex) {
+                eventdesc = eventDescription.Substring(0, eventDescription.LastIndexOf('/'));
+            }
             var SYSTEM_EVENT = new AUTH_SYSTEM_EVENT_LOG()
             {
                 //  USER_ID = Guid.NewGuid().ToString(),
                 EVENT_LOG_ID = SystemEventLogRepository.GetNewID("AUTH_SYSTEM_EVENT_LOG", "EVENT_LOG_ID"),
                 EVENT_NAME = eventName,
-                EVENT_DESCRIPTION = eventDescription.Substring (0,eventDescription .LastIndexOf ('/')),
+                EVENT_DESCRIPTION = eventdesc,
                 OPERATE_USER = operateUser,
                 TARGET_SYSTEM = targetSystem,
                 FROM_PC = idAdress,

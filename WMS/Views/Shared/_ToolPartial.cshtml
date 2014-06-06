@@ -50,7 +50,9 @@
     @if (ViewBag.hasOutstore != null && ViewBag.hasOutstore)
     {<a id="outstore" href="#" class="easyui-linkbutton" plain="true" fun="true">生成出库单</a>}  
   @if (ViewBag.hasMix != null && ViewBag.hasMix)
-    {<a id="mix" href="#" class="easyui-linkbutton" plain="true" fun="true">混装</a>}                                                                                         
+    {<a id="mix" href="#" class="easyui-linkbutton" plain="true" fun="true">混装</a>} 
+    @if (ViewBag.haswfloot != null && ViewBag.haswfloot)
+    {<a id="wfloot" href="#" class="easyui-linkbutton" plain="true" fun="true">录为平库</a>}                                                                                    
     @if (ViewBag.hasPrint != null && ViewBag.hasPrint)
     {<a id="print" href="#" class="easyui-linkbutton"  plain="true" fun="true">打印</a>}
     @if (ViewBag.hasHelp != null && ViewBag.hasHelp)
@@ -67,5 +69,7 @@
     {<a id="finish" href="#" class="easyui-linkbutton" plain="true" fun="true">完成</a>}
     @if (ViewBag.hasBatch != null && ViewBag.hasBatch)
     {<a id="batch" href="#" class="easyui-linkbutton" plain="true" fun="true">批量</a>}
+    @if (ViewBag.hasWbarcode != null && ViewBag.hasWbarcode)
+    {<a id="wbarcode" href="#" class="easyui-linkbutton" plain="true" fun="true">录条码</a>}
 
 </div>

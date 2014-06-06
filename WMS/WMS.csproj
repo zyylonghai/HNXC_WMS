@@ -190,6 +190,7 @@
     <Compile Include="Controllers\Wms\WMS\ProductDetailsController.cs" />
     <Compile Include="Controllers\Wms\WMS\ProductLedgerController.cs" />
     <Compile Include="Controllers\Wms\WMS\ProductMonthlyController.cs" />
+    <Compile Include="Controllers\Wms\WMS\ReplaceController.cs" />
     <Compile Include="Controllers\Wms\WMS\SamplingController.cs" />
     <Compile Include="Controllers\Wms\WMS\SamplingSearchController.cs" />
     <Compile Include="Controllers\Wms\WMS\SamplingWorkController.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Controllers\Wms\WMS\StockOutBillController.cs" />
     <Compile Include="Controllers\Wms\WMS\StockOutSearchController.cs" />
     <Compile Include="Controllers\Wms\WMS\StockOutWorkController.cs" />
+    <Compile Include="Controllers\Wms\WMS\StoreSearchController.cs" />
     <Compile Include="Controllers\Wms\WMS\WorkSearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1546,6 +1548,25 @@
     <Content Include="Views\Help\_SearchPartial.cshtml" />
     <Content Include="Views\Help\_helpPartial2.cshtml" />
     <Content Include="Views\Help\_helpPartial1.cshtml" />
+    <Content Include="Views\Shared\_CancelPartial.cshtml" />
+    <Content Include="Views\StockOutWork\_CancelPartial.cshtml" />
+    <Content Include="Views\StockInWork\_CancelPartial.cshtml" />
+    <Content Include="Views\Replace\Index.cshtml" />
+    <Content Include="Views\Replace\_SearchPartial.cshtml" />
+    <Content Include="Views\Replace\_AddPartial.cshtml" />
+    <Content Include="Views\StockOutBill\_BillPartial.cshtml" />
+    <Content Include="Views\StockOutBill\_CellPartial.cshtml" />
+    <Content Include="Views\Replace\_BillPartial.cshtml" />
+    <Content Include="Views\Replace\_AntiTrialPartial.cshtml" />
+    <Content Include="Views\Replace\_AuditPartial.cshtml" />
+    <Content Include="Views\Replace\_DeletePartial.cshtml" />
+    <Content Include="Views\Replace\_EditPartial.cshtml" />
+    <Content Include="Views\StoreSearch\Index.cshtml" />
+    <Content Include="Views\StoreSearch\_SearchPartial.cshtml" />
+    <Content Include="Views\Shared\_WbarcodePartial.cshtml" />
+    <Content Include="Views\StockInWork\_WbarcodePartial.cshtml" />
+    <Content Include="Views\Shared\_wflootPartial.cshtml" />
+    <Content Include="Views\StockInBill\_wflootPartial.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

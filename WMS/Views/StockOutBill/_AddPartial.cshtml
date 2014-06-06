@@ -93,18 +93,28 @@
             },
             onSelect: function (index, data) {
                 if (data.BTYPE_CODE == '006') {//选中倒库单
-//                    $('#LINE_NO').combogrid('disable');
+                    //                    $('#LINE_NO').combogrid('disable');
                     $('#LINE_NO').combogrid({
                         required: false
-//                       disabled:true
+                        //                       disabled:true
                     });
+                    $('#btdkselect').linkbutton({
+                        disabled: false
+                    });
+                    CFormuladisabled(0);
                 }
                 else {
-//                    $('#LINE_NO').combogrid('enable');
+                    //                    $('#LINE_NO').combogrid('enable');
                     $('#LINE_NO').combogrid({
                         required: true,
                         disabled: false
                     });
+                    $('#btdkselect').linkbutton({
+                        disabled: true
+                    });
+                    $('#SOURCE_BILLNO').val("");
+                    CFormuladisabled(1);
+
                 }
             }
         });
@@ -112,6 +122,19 @@
 //        var data = g.datagrid('getData');
 //        alert(g.rows[0].BTYPE_CODE);
 //        $('#BTYPE_CODE').combogrid('deleteRow', $('#BTYPE_CODE').combogrid('getRowIndex', '005'));
+    }
+    //牌号，配方，载入配方等控件的启用或禁用
+    function CFormuladisabled(flag) {
+        if (flag == 1) {//启用
+            $('#CIGARETTE_CODE').combogrid('enable');
+            $('#FORMULA_CODE').combogrid('enable');
+            $('#btLoadFormula').attr('disabled', false);
+        }
+        else {
+            $('#CIGARETTE_CODE').combogrid('disable');
+            $('#FORMULA_CODE').combogrid('disable');
+            $('#btLoadFormula').attr('disabled', true);
+        }
     }
     //仓库编号
     function GetWarehouseCode() {
@@ -262,6 +285,14 @@
 
     }
 
+    //查询按钮点击触发的函数
+    function billselect() {
+        $('#BillData').dialog('open').dialog('setTitle', '选择来源单据');
+        $('#BarcodeDetail').datagrid('loadData', { total: 0, rows: [] });
+        $('#BillDetail').datagrid({ url: '/FillBill/billselect/?page=1&rows=30&billmethod=3' });
+        //        $("#BillDetail").datagrid('reload');
+    }
+
     function save() {
         var changesRows = {
             inserted: []
@@ -272,7 +303,11 @@
             changesRows.inserted.push(Rows.rows[i]);
         }
         if (clickbt == "add") {
-            url = '/StockOutBill/Add/?prefix=OS&detail=' + JSON.stringify(changesRows.inserted);
+            if ($('#BTYPE_CODE').combogrid('getValue') == '006') { //属于倒库单
+                url = '/Inventory/Add/?prefix=OS&detail=' + JSON.stringify(changesRows.inserted);
+            }
+            else
+                url = '/StockOutBill/Add/?prefix=OS&detail=' + JSON.stringify(changesRows.inserted);
         }
         if (clickbt == "edit") {
             url = '/StockOutBill/Edit/?detail=' + JSON.stringify(changesRows.inserted);
@@ -309,11 +344,11 @@
 
 
 <div id="dlg" class="easyui-dialog" modal="true"
-        style="width:850px;height:450px;padding:0px 0px"
+        style="width:950px;height:450px;padding:0px 0px"
         closed="true" buttons="#dlg-buttons">
 	<div class="easyui-layout" fit="true">
         <div region="center" border="false">
-            <table class="easyui-datagrid" border="false" toolbar="#dlg-detailButtons" width="700" id="inBillDetail"
+            <table class="easyui-datagrid" border="false" toolbar="#dlg-detailButtons" width="800" id="inBillDetail"
                 fit="true" fitColumns="true" singleSelect="true" rownumbers="true" pagination="false" url="" striped="true">
                 <thead>
                     <tr>
@@ -344,24 +379,28 @@
                 </tr>
                 <tr>
                 <td width="90">单据编号</td>
-                <td width="133"><input name="BILL_NO" id="BILL_NO" readonly="true"></td>
+                <td width="133"><input name="BILL_NO" id="BILL_NO" readonly="true" style="width:135px;"></td>
                 <td width="90">单据日期</td>
-                <td width="168"><input name="BILL_DATE" id="BILL_DATE"  ></td>
+                <td width="140"><input name="BILL_DATE" id="BILL_DATE"  ></td>
                 <td width="90">操作人员</td>
-                <td width="168"><input  name="OPERATER" id="OPERATER"  readonly="true"/></td>
+                <td width="140"><input  name="OPERATER" id="OPERATER"  readonly="true" style="width:135px;"/></td>
                 <td width="90">操作日期</td>
-                <td width="168"><input id="OPERATE_DATE" name="OPERATE_DATE"  readonly="true" disabled="true"></td>
+                <td width="140"><input id="OPERATE_DATE" name="OPERATE_DATE"  readonly="true" disabled="true"></td>
+                <td width="70"></td>
                  </tr>
                 <tr>
                 <td width="90">单据类型</td>
-                <td width="168"><input name="BTYPE_CODE"  id="BTYPE_CODE" class="easyui-combogrid"/></td>
+                <td width="140"><input name="BTYPE_CODE"  id="BTYPE_CODE" class="easyui-combogrid"/></td>
                 <td width="90">仓库编号</td>
-                <td width="168"><input name="WAREHOUSE_CODE"  id="WAREHOUSE_CODE" class="easyui-combogrid"/></td>
+                <td width="140"><input name="WAREHOUSE_CODE"  id="WAREHOUSE_CODE" class="easyui-combogrid"/></td>
                 <td width="90">制丝线</td>
-                <td width="168"><input name="LINE_NO" id="LINE_NO" class="easyui-combogrid"/></td>
-                <td width="90">批次重量</td>
-                <td width="168"><input id="BATCH_WEIGHT"  name="BATCH_WEIGHT" readonly="readonly" class="easyui-numberbox" precision="2" ></td>
-      
+                <td width="140"><input name="LINE_NO" id="LINE_NO" class="easyui-combogrid"/></td>
+                <td width="90">倒出批次</td>
+                <td  colspan="2">
+                <input id="SOURCE_BILLNO"  name="SOURCE_BILLNO" readonly="readonly" style="width:135px;" />
+                <a id="btdkselect" href="#" onclick="billselect()" class="easyui-linkbutton" iconcls="icon-search" plain="true"></a>
+                </td>
+    @*           <td width="70"> <input type="button" id="_btsearch"  onclick="billselect()"  onmouseover="btmouseup(this)" onmouseout="btmouseout(this)"  class="btok" value="查询"/></td>*@
 @*                <td width="90">出库方式</td>
                 <td width="133" >
                    <select  name="BILL_METHOD" id="BILL_METHOD"  class="easyui-combobox" >
@@ -373,11 +412,13 @@
                 <td width="168"><input id="BATCH_SELECT"  name="BATCH_WEIGHT"  class="easyui-combogrid"></td>*@
                  </tr>
                  <tr>
+                <td width="90">批次重量</td>
+                <td width="140"><input id="BATCH_WEIGHT"  name="BATCH_WEIGHT" readonly="readonly" class="easyui-numberbox" precision="2" ></td>
                 <td width="90">牌   号</td>
-                <td width="168"><input id="CIGARETTE_CODE" name="CIGARETTE_CODE"   class="easyui-combogrid"></td>
+                <td width="140"><input id="CIGARETTE_CODE" name="CIGARETTE_CODE"   class="easyui-combogrid"></td>
                 <td width="90">配方代号</td>
-                <td width="168"><input id="FORMULA_CODE" name="FORMULA_CODE"  class="easyui-combogrid"></td>
-                <td colspan="4">
+                <td width="140"><input id="FORMULA_CODE" name="FORMULA_CODE"  class="easyui-combogrid"></td>
+                <td  colspan="3">
                   @*<a href="#" class="easyui-linkbutton"  onclick="Loadformula()" id="btLoadFormula"  style="width:66px ">载入配方</a> *@
                   <input type="button"  onclick="Loadformula()" id="btLoadFormula" style="width:100px "  onmouseover="btmouseup(this)" onmouseout="btmouseout(this)"  class="btok" value="载入配方"/>
                 </td>
@@ -455,5 +496,7 @@
       <input type="button"  onclick="DetailSave()"  onmouseover="btmouseup(this)" onmouseout="btmouseout(this)"  class="btok" value="确定"/>
        <input type="button"  onclick="javascript:$('#dlg-AddBillDetail').dialog('close')" onmouseover="btmouseup(this)" onmouseout="btmouseout(this)"  class="btcance" value="取消"/>
 </div>
+@Html.Partial("_BillPartial");  
+@*@Html.Partial("_CellPartial");*@
 
 

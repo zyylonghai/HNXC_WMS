@@ -51,6 +51,8 @@ namespace THOK.Wms.Bll.Service
         public ICMDCarRepository CarRepository { get; set; }
         [Dependency]
         public ISysErrorCodeRepository SyserrorcodeRepository { get; set; }
+        [Dependency]
+        public IWCSTaskRepository WcstaskRepository { get; set; }
 
         //public bool test() {
         //    OracleConnection ora = new OracleConnection(); 
@@ -107,7 +109,7 @@ namespace THOK.Wms.Bll.Service
         //出库作业.
         public bool Task(string billno, string cigarettecode, string formulacode, string batchweight, string tasker, out string error)
         {
-            string sqlstr = "begin STOCKOUTWORK('" + billno + "','" + cigarettecode + "','" + formulacode + "'," + batchweight + ",'" + tasker + "');end;";
+            string sqlstr = "begin STOCKOUTWORK2('" + billno + "','" + cigarettecode + "','" + formulacode + "'," + batchweight + ",'" + tasker + "');end;";
             //string sqlstr = "update WMS_BILL_MASTER set state='2' where bill_no='"+billno+"' ";
             int result = ProductStateRepository.Exeprocedure(sqlstr, out error);
             //return ((ObjectContext)RepositoryContext).ExecuteStoreCommand("","");
@@ -499,6 +501,33 @@ namespace THOK.Wms.Bll.Service
             int total = temp.Count();
             temp = temp.Skip((page - 1) * rows).Take(rows);
             return new { total, rows = temp};
+        }
+
+        //设置条码
+        public bool SetBarcode(string billno, string barcodestr)
+        {
+            var productstatequery = ProductStateRepository.GetQueryable();
+            var taskquery = WcstaskRepository.GetQueryable();
+            string[] barcodearray = barcodestr.Split(';');
+            for (int i = 0; i < barcodearray.Length; i++) {
+                if (!string.IsNullOrEmpty(barcodearray[i]))
+                {
+                    //string itemno = barcodearray[i].Split(':')[0];
+                    decimal stateitemno = decimal.Parse(barcodearray[i].Split(':')[0]);
+                    string taskitemno = billno + barcodearray[i].Split(':')[0].PadLeft(2, '0');
+                    string barcode = barcodearray[i].Split(':')[1];
+                    var productstate = productstatequery.FirstOrDefault(a => a.BILL_NO == billno && a.ITEM_NO ==stateitemno);
+                    var tast = taskquery.FirstOrDefault(n => n.BILL_NO == billno && n.TASK_ID ==taskitemno);
+                    productstate.PRODUCT_BARCODE = barcode;
+                    productstate.PALLET_CODE = barcode;
+                    tast.PRODUCT_BARCODE = barcode;
+                    tast.PALLET_CODE = barcode;
+                }
+            }
+            int result = ProductStateRepository.SaveChanges();
+            if (result == -1) return false;
+            else
+                return true;
         }
     }
 }

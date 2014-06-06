@@ -74,7 +74,7 @@ namespace THOK.Wms.Bll.Service
                     i.FPRODUCT_CODE
                 });
                 if (!string.IsNullOrEmpty(BILLNO)) {
-                    stockin = stockin.Where(i => i.MBILL_NO == BILLNO); 
+                    stockin = stockin.Where(i => i.MBILL_NO == BILLNO.Trim ()); 
                 }
                 if (!string.IsNullOrEmpty(BILLDATEFROM)) {
                     DateTime datestare = DateTime.Parse(BILLDATEFROM);

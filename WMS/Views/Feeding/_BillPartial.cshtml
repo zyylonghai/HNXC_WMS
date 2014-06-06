@@ -20,10 +20,10 @@
         var data = $('#BarcodeDetail').datagrid('getSelections');
         var billRow = $('#BillDetail').datagrid('getSelected');
         if (billRow) {
-            if (billRow.SOURCE_BILLNO == "" || billRow.SOURCE_BILLNO == null)
+//            if (billRow.SOURCE_BILLNO == "" || billRow.SOURCE_BILLNO == null)
                 $('#SOURCE_BILLNO').val(billRow.BILL_NO);
-            else
-                $('#SOURCE_BILLNO').val(billRow.SOURCE_BILLNO);
+//            else
+//                $('#SOURCE_BILLNO').val(billRow.SOURCE_BILLNO);
             if (data) {
                 var Rows = $('#inBillDetail').datagrid('getData');
 //                if (Rows.total == 0)

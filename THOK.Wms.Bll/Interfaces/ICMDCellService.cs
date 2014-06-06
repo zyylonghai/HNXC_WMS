@@ -71,6 +71,8 @@ namespace THOK.Wms.Bll.Interfaces
         bool Completedata(WMS_TASKRECORD taskrecord, string tasker,DateTime indate, ref string errorinfo);
         //获取某损益单下的作业明细
         object GetTaskrecordDetail(int page, int rows, string billno, string productcode);
+        //库存查询
+        object Storage(int page, int rows);
       //  bool uploadCell();
     }
 }

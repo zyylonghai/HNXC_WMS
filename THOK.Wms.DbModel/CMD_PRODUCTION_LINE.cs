@@ -20,5 +20,6 @@ namespace THOK.Wms.DbModel
         public virtual ICollection<WMS_PRODUCTION_MASTER> WMS_PRODUCTION_MASTER { get; set; }
         public virtual ICollection<WMS_SCHEDULE_DETAIL> WMS_SCHEDULE_DETAIL { get; set; }
         public virtual ICollection<WMS_BILL_MASTERH> WMS_BILL_MASTERH { get; set; }
+        public virtual ICollection<VIEW_BILL_MAST> VIEW_BILL_MAST { get; set; }
     }
 }

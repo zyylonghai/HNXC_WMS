@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/17/2013 16:25:46" ReportInfo.Modified="03/13/2014 11:11:41" ReportInfo.CreatorVersion="2013.4.1.0" PrintSettings.Copies="2">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/17/2013 16:25:46" ReportInfo.Modified="03/17/2014 10:18:52" ReportInfo.CreatorVersion="2013.4.1.0" PrintSettings.Copies="2">
   <Dictionary>
     <ViewDataSource Name="printreport" ReferenceName="printreport" DataType="System.Int32" Enabled="true">
       <Column Name="PRODUCT_BARCODE" DataType="System.String"/>
@@ -32,7 +32,7 @@
   </Dictionary>
   <ReportPage Name="Page1" PaperWidth="105" PaperHeight="75" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" Fill.Color="White">
     <DataBand Name="Data1" Width="396.9" Height="270.61" DataSource="printreport">
-      <BarcodeObject Name="Barcode1" Left="-6.13" Top="26.42" Width="244.19" Height="244.19" DataColumn="printreport.PRODUCT_BARCODE" Text="" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+      <BarcodeObject Name="Barcode1" Left="-6.13" Top="26.42" Width="244.19" Height="244.19" AutoSize="false" DataColumn="printreport.PRODUCT_BARCODE" Text="" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
       <TableObject Name="Table1" Left="9.87" Top="13.98" Width="353.61" Height="18.9">
         <TableColumn Name="Column1"/>
         <TableColumn Name="Column2" Width="105.19"/>

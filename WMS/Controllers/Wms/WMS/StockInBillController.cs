@@ -36,6 +36,7 @@ namespace WMS.Controllers.Wms.WMS
             ViewBag.hasAudit = true;
             ViewBag.hasAntiTrial = true;
             ViewBag.hasMix = true;
+            ViewBag.haswfloot = true;
             ViewBag.ModuleID = moduleID;
             return View();
         }
@@ -158,6 +159,17 @@ namespace WMS.Controllers.Wms.WMS
                 success=msg
             };
             return Json(just, "text", JsonRequestBehavior.AllowGet);
+        }
+         //录为平库
+        public ActionResult wfloot(string BillNo) {
+            string error = "";
+            bool bResult = BillMasterService.Wfloot(BillNo, out error);
+            string msg = bResult ? "操作成功" : "操作失败: " + error;
+            var just = new
+            {
+                success = msg
+            };
+            return Json(just, "text/html", JsonRequestBehavior.AllowGet);
         }
     }
 }

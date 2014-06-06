@@ -76,6 +76,8 @@ namespace THOK.Wms.Repository
             modelBuilder.Configurations.Add(new WMS_PALLET_DETAILMap());
             modelBuilder.Configurations.Add(new WMS_BALANCE_MASTERMap());
             modelBuilder.Configurations.Add(new WMS_BALANCE_DETAILMap());
+            modelBuilder.Configurations.Add(new WMS_REPLACE_MASTERMap());
+            modelBuilder.Configurations.Add(new WMS_REPLACE_DETAILMap());
 
 
             modelBuilder.Configurations.Add(new SYS_TABLE_STATEMap());
@@ -92,6 +94,8 @@ namespace THOK.Wms.Repository
             modelBuilder.Configurations.Add(new PRINTREPORTMap());
             modelBuilder.Configurations.Add(new WORKSELECTMap());
             modelBuilder.Configurations.Add(new BILLREPORTMap());
+            modelBuilder.Configurations.Add(new VIEW_STORAGEMap());
+            modelBuilder.Configurations.Add(new VIEW_BILL_MASTMap());
 
             
             #endregion

@@ -77,7 +77,7 @@ namespace WMS.Controllers.Wms.WMS
             var Billdetail = BillMasterService.GetSubDetailsforfeeeding(page, rows, BillNo);
             return Json(Billdetail, "text/html", JsonRequestBehavior.AllowGet);
         }
-        //抽检补料入库单添加
+        //紧急补料单添加
         public ActionResult Add(WMS_BILL_MASTER mast, object detail, string prefix)
         {
             string userid = this.GetCookieValue("userid");

@@ -66,3 +66,7 @@
 {     @Html.Partial("_ExitPartial")} 
 @if (ViewBag.hasCopy != null && ViewBag.hasCopy)
 {     @Html.Partial("_CopyPartial")} 
+@if (ViewBag.hasWbarcode != null && ViewBag.hasWbarcode)
+{     @Html.Partial("_WbarcodePartial")} 
+ @if (ViewBag.haswfloot != null && ViewBag.haswfloot)
+ {  @Html.Partial("_wflootPartial")}

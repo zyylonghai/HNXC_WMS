@@ -29,20 +29,21 @@
                 $('#btnEditBillDetail').linkbutton('disable');
                 //
                 beforechoice = true;
+                $('#inBillDetail').datagrid('loadData', { total: 0, rows: [] });
             }
             else { //等级
-                //禁用牌号控件
-                $('#CIGARETTE_CODE').combogrid('clear');
-                $('#CIGARETTE_CODE').attr('readonly', true);
-                $('#CIGARETTE_CODE').combogrid('disable');
-                //禁用配方控件
-                GetFormula("");
-                $('#FORMULA_CODE').combogrid('clear');
-                $('#FORMULA_CODE').attr('readonly', true);
-                $('#FORMULA_CODE').combogrid('disable');
-                //禁用批次重量控件
-                $('#BATCH_WEIGHT').numberbox('disable');
-                $('#BATCH_WEIGHT').numberbox('clear');
+//                //禁用牌号控件
+//                $('#CIGARETTE_CODE').combogrid('clear');
+//                $('#CIGARETTE_CODE').attr('readonly', true);
+//                $('#CIGARETTE_CODE').combogrid('disable');
+//                //禁用配方控件
+//                GetFormula("");
+//                $('#FORMULA_CODE').combogrid('clear');
+//                $('#FORMULA_CODE').attr('readonly', true);
+//                $('#FORMULA_CODE').combogrid('disable');
+//                //禁用批次重量控件
+//                $('#BATCH_WEIGHT').numberbox('disable');
+//                $('#BATCH_WEIGHT').numberbox('clear');
                 //禁用载入配方按钮
                 $('#btLoadFormula').attr('disabled', true);
                 //启用明细按钮

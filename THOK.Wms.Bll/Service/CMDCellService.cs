@@ -1613,5 +1613,20 @@ namespace THOK.Wms.Bll.Service
            });
            return new { total, rows = temp };
         }
+
+        //库存查询
+        public object Storage(int page, int rows)
+        {
+            //IQueryable<CMD_CELL> cellQuery = CMDCellRepository.GetQueryable();
+            //IQueryable<CMD_PRODUCT> productquery = CMDProductRepository.GetQueryable();
+            //var storage = from a in cellQuery
+            //              join b in productquery on a.PRODUCT_CODE equals b.PRODUCT_CODE
+            //              group b by b.GRADE_CODE into g
+            //              select new { 
+            //                  g.Key,
+            //                  TOTALPACKAGE
+            //              };
+            return null;
+        }
     }
 }

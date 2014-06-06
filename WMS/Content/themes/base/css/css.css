@@ -217,6 +217,13 @@ textarea{
   height:25px;
   background-color:#FF0000
 }
+/*存放托盘组的货位*/
+.pallet
+{
+  width:20px;
+  height:25px;
+  background-color:#f18d21
+    }
 .xuanfu{ 
  width: 100%;
  height: 30px; 

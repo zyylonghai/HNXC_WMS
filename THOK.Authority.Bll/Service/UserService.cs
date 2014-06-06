@@ -56,7 +56,10 @@ namespace THOK.Authority.Bll.Service
         public string GetUserIp(string USER_NAME)
         {
             string loginPC = "";
-            var user = UserRepository.GetQueryable().Where(i => i.USER_NAME.ToLower() == USER_NAME.ToLower()).ToArray();
+            try
+            {
+                var user = UserRepository.GetQueryable().Where(i => i.USER_NAME.ToLower() == USER_NAME.ToLower()).ToArray();
+
             if (user.Count() > 0)
             {
                 loginPC = user[0].LOGIN_PC;
@@ -66,6 +69,8 @@ namespace THOK.Authority.Bll.Service
             {
                 return "";
             }
+            }
+            catch (Exception ex) { return null; }
         }
 
         public bool DeleteUserIp(string USER_NAME)

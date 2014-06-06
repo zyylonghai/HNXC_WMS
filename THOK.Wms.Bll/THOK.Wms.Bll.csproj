@@ -72,6 +72,7 @@
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\ISysBillTargetService.cs" />
     <Compile Include="Interfaces\ISysTableStateService.cs" />
+    <Compile Include="Interfaces\IViewstorageService.cs" />
     <Compile Include="Interfaces\IWMSBalanceDetailService.cs" />
     <Compile Include="Interfaces\IWMSBalanceMasterService.cs" />
     <Compile Include="Interfaces\IWMSBillMasterHService.cs" />
@@ -123,9 +124,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Service\CMDProductService.cs" />
+    <Compile Include="Interfaces\IWMSReplacemasterService.cs" />
     <Compile Include="Service\ServiceBase.cs" />
     <Compile Include="Service\SysBillTargetService.cs" />
     <Compile Include="Service\SysTableStateService.cs" />
+    <Compile Include="Service\ViewstorageService.cs" />
     <Compile Include="Service\WMSBalanceDetailService.cs" />
     <Compile Include="Service\WMSBalanceMasterService.cs" />
     <Compile Include="Service\WMSBillMasterHService.cs" />
@@ -134,6 +137,7 @@
     <Compile Include="Service\WMSPalletMasterService.cs" />
     <Compile Include="Service\WMSProductionMasterService.cs" />
     <Compile Include="Service\WMSProductStateService.cs" />
+    <Compile Include="Service\WMSReplacemasterService.cs" />
     <Compile Include="Service\WMSScheduleDetailService.cs" />
     <Compile Include="Service\WMSScheduleMasterService.cs" />
     <Compile Include="Service\WMSScheduleService.cs" />

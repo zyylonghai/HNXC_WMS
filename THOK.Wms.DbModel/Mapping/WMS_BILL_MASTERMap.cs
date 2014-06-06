@@ -68,6 +68,7 @@ namespace THOK.Wms.DbModel.Mapping
 
             this.Property(t => t.FORMULA_CODE)
                 .HasMaxLength(20);
+            this.Property(t => t.BATCH_NO).HasMaxLength(20);
 
             // Table & Column Mappings
             this.ToTable("WMS_BILL_MASTER","HNXC");
@@ -92,6 +93,7 @@ namespace THOK.Wms.DbModel.Mapping
             this.Property(t => t.CIGARETTE_CODE).HasColumnName("CIGARETTE_CODE");
             this.Property(t => t.FORMULA_CODE).HasColumnName("FORMULA_CODE");
             this.Property(t => t.BATCH_WEIGHT).HasColumnName("BATCH_WEIGHT");
+            this.Property(t => t.BATCH_NO).HasColumnName("BATCH_NO");
 
             // Relationships
             this.HasRequired(t => t.CMD_BILL_TYPE)

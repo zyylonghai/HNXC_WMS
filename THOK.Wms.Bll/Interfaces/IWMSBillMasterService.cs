@@ -74,5 +74,9 @@ namespace THOK.Wms.Bll.Interfaces
         object GetSubDetailsforfeeeding(int page, int rows, string BillNo);
         //结束损益单作业
         bool StockdifferTaskover(string BillNo,string tasker);
+        //任务取消
+        bool CanceTask(string BillNo,out string error);
+        //根据批次号，录入到平库
+        bool Wfloot(string billno, out string error);
     }
 }

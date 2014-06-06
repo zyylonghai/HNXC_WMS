@@ -27,6 +27,8 @@ namespace THOK.Wms.Bll.Interfaces
         object Workdetail(int page, int rows, string Taskid);
         //
         string GetPdfName(string Path, string username, string barcodes, string billno,string PrintCount);
+        //设置条码,barcodestr:所有烟包对应条码形成的字符串
+        bool SetBarcode(string billno, string barcodestr);
         
     }
 }

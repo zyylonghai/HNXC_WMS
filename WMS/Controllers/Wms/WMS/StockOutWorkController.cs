@@ -19,6 +19,8 @@ namespace WMS.Controllers.Wms.WMS
         // GET: /StockOutWork/
         [Dependency]
         public IWMSProductStateService ProductStateService { get; set; }
+        [Dependency]
+        public IWMSBillMasterService BillMasterService { get; set; }
 
         public ActionResult Index(string moduleID)
         {
@@ -26,7 +28,9 @@ namespace WMS.Controllers.Wms.WMS
             //ViewBag.hasBarcode = true;
             ViewBag.hasTask = true;
             //ViewBag.hasExit = true;
+            ViewBag.hasCancel = true;
             ViewBag.ModuleID = moduleID;
+            
             return View();
         }
         //获取某条单据下的作业任务.
@@ -42,6 +46,17 @@ namespace WMS.Controllers.Wms.WMS
             string error = "";
             bool bResult = ProductStateService.Task(BillNo,cigarettecode ,formulacode ,batchweight, userName,out error);
             string msg = bResult ? "作业成功" : "作业失败"+error;
+            var just = new
+            {
+                success = msg
+            };
+            return Json(just, "text/html", JsonRequestBehavior.AllowGet);
+        }
+         //取消任务
+        public ActionResult Cancetask(string BillNo) {
+            string error = "";
+            bool bResult = BillMasterService.CanceTask(BillNo,out error);
+            string msg = bResult ? "成功取消" : "取消失败: "+error;
             var just = new
             {
                 success = msg

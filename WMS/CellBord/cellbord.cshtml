@@ -69,14 +69,14 @@
             $.getJSON("/CellStateSearch/Getcellstate/?shelfcode=" + rownumb, function (json) {
                 if (json) {
                     for (i = 0; i < json.total; i++) {
-                        if (json.rows[i].IS_ACTIVE == "0") { //禁用中的货位
+                        if (json.rows[i].IS_ACTIVE == "0") { //禁用中的货位  用灰色
                             document.getElementById(json.rows[i].CELL_CODE.substr(3)).className = "unactive";
                         }
-                        else if (json.rows[i].ERROR_FLAG == "1") { //有异常的货位
+                        else if (json.rows[i].ERROR_FLAG == "1") { //有异常的货位 用红色
                             document.getElementById(json.rows[i].CELL_CODE.substr(3)).className = "error";
                         }
                         else if (json.rows[i].PRODUCT_CODE == null && json.rows[i].IS_LOCK == "1") {
-                            //被锁定的空货位,(即已被选中)    用红色表示
+                            //被锁定的空货位,(即已被选中)    用黄色表示
                             document.getElementById(json.rows[i].CELL_CODE.substr(3)).className = "lockemptycell";
                         }
                         else if (json.rows[i].PRODUCT_CODE == null && json.rows[i].IS_LOCK == "0") {
@@ -85,7 +85,12 @@
                         }
                         else if (json.rows[i].PRODUCT_CODE != null && json.rows[i].IS_LOCK == "0") {
                             //已被占用并处于解锁状态的货位,  用蓝色表示
-                            document.getElementById(json.rows[i].CELL_CODE.substr(3)).className = "unlockoccupycell";
+                            if (json.rows[i].PRODUCT_CODE == '0000') {
+                                //存放空托盘组货位 用橙色
+                                document.getElementById(json.rows[i].CELL_CODE.substr(3)).className = "pallet";
+                            }
+                            else
+                                document.getElementById(json.rows[i].CELL_CODE.substr(3)).className = "unlockoccupycell";
                         }
                         else if (json.rows[i].PRODUCT_CODE != null && json.rows[i].IS_LOCK == "1") {
                             //已被占用并处于锁定状态的货位,  用草绿色表示
@@ -403,6 +408,8 @@
            <td>被锁定的空货位;</td>
            <td  class="unlockemptycell"></td>
            <td>处于解锁状态的空货位</td>
+           <td class="pallet"></td>
+           <td>存放托盘组的货位</td>
            <td class="unlockoccupycell"></td>
            <td>已被占用并处于解锁状态的货位</td>
            <td class="lockoccupycell"></td>

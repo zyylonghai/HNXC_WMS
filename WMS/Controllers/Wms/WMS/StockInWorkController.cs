@@ -27,6 +27,8 @@ namespace WMS.Controllers.Wms.WMS
             ViewBag.hasSearch = true;
             ViewBag.hasBarcode = true;
             ViewBag.hasTask = true;
+            ViewBag.hasCancel = true;
+            ViewBag.hasWbarcode = true;
             //ViewBag.hasExit = true;
             ViewBag.ModuleID = moduleID;
             return View();
@@ -64,6 +66,16 @@ namespace WMS.Controllers.Wms.WMS
 
             return Json(JsonMessageHelper.getJsonMessage(true, FileName, null), "text", JsonRequestBehavior.AllowGet);
 
+        }
+        public ActionResult Setbarcode(string billno, string barcodestr)
+        {
+            bool bResult = ProductStateService.SetBarcode(billno, barcodestr);
+            string msg = bResult ? "录入成功" : "录入失败";
+            var just = new
+            {
+                success = msg
+            };
+            return Json(just, "text/html", JsonRequestBehavior.AllowGet);
         }
     }
 }
